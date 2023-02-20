@@ -39,8 +39,20 @@ form {
     padding-bottom: .5em;
 }
 
+.list-name {
+    cursor: pointer;
+}
+
+.list-name:hover {
+    opacity: 0.7;
+}
+
 .list-container {
     grid-area: lists;
+}
+
+.active-list {
+    font-weight:700;
 }
 
 .todo-list {

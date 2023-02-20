@@ -23,30 +23,30 @@
 
     <div class="todo-list" data-list-display-container>
         <div class="todo-header">
-            <h2 class="list-title">Swahili</h2>
-            <p class="task-count">3 tasks remaining</p>
+            <h2 class="list-title" data-list-title>Swahili</h2>
+            <p class="task-count" data-list-count>3 tasks remaining</p>
         </div>
 
         <div class="todo-body">
-            <div class="tasks">
+            <div class="tasks" data-tasks>
                 
             </div>
         </div>
 
         <div class="new-task-creator">
-            <form action="" data new task form>
+            <form action="" data-new-task-form>
                 <input type="text" class="new task" data-new-task-input placeholder="new task name" aria-label="new task name">
                 <button class="btn create" aria-label="create new task">+</button>
             </form>
         </div>
 
         <div class="delete-stuff">
-            <button class="btn delete">Clear completed tasks</button>
-            <button class="btn delete">Delete list</button>
+            <button class="btn delete" data-clear-complete-tasks>Clear completed tasks</button>
+            <button class="btn delete" data-delete-list-button>Delete list</button>
         </div>
     </div>
 
-    <template id="task-template">
+    <template id="task-template" data-task-template>
         <div class="task">
             <input type="checkbox">
             <label>
