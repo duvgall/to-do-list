@@ -1,23 +1,20 @@
-
-
 const listsContainer = document.querySelector('[data-lists]');
 const newListForm = document.querySelector('[data-new-list-form]');
+const newListInput = document.querySelector('[data-new-list-input]')
 const deleteListBtn = document.querySelector('[data-delete-list-button]');
 const listDisplayContainer = document.querySelector('[data-list-display-container]');
 const listTitleElement = document.querySelector('[data-list-title]');
 const listCountElement = document.querySelector('[data-list-count]');
 const taskContainer = document.querySelector('[data-tasks]');
-const taskTemplate = document.querySelector('[data-task-template]');
+const taskTemplate = document.getElementById('task-template');
 const newTaskForm = document.querySelector('[data-new-task-form]');
 const newTaskInput = document.querySelector('[data-new-task-input]');
-const clearCompleteTasksBtn = document.querySelector('[data-clear-complete-tasks]');
+const clearCompleteTasksBtn = document.querySelector('[data-clear-complete-tasks-button]');
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
-
-//EVENT LISTENERS
 
 listsContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase() === 'li') {
@@ -28,7 +25,7 @@ listsContainer.addEventListener('click', e => {
 
 taskContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase === 'input') {
-        const selectedList = lists.find(list => list.id ===selectedListId)
+        const selectedList = lists.find(list => list.id === selectedListId)
         const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
         selectedTask.complete = e.target.checked
         save()
@@ -51,7 +48,7 @@ deleteListBtn.addEventListener('click', e => {
 newListForm.addEventListener('submit', e => {
     e.preventDefault()
     const listName = newListInput.value
-    if (listName == null || listName == '') return
+    if (listName == null || listName === '') return
     const list = createList(listName)
     newListInput.value = null
     lists.push(list)
@@ -68,8 +65,6 @@ newTaskForm.addEventListener('submit', e => {
     selectedList.tasks.push(task)
     saveAndRender()
 })
-
-// Functions
 
 function createList(name) {
     return { id: Date.now().toString(), name: name, tasks: [] }
@@ -100,7 +95,7 @@ function render() {
         listDisplayContainer.style.display = ''
         listTitleElement.innerText = selectedList.name
         renderTaskCount(selectedList)
-        clearElement(tasksContainer)
+        clearElement(taskContainer)
         renderTasks(selectedList)
     }
 }
@@ -114,16 +109,15 @@ function renderTasks(selectedList) {
         const label = taskElement.querySelector('label')
         label.htmlFor = task.id
         label.append(task.name)
-        tasksContainer.appendChild(taskElement)
+        taskContainer.appendChild(taskElement)
      })
 }
 
 function renderTaskCount(selectedList) {
     const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length
-    const taskString = incompleteTaskCount === 1 ? 'task' : 'task'
+    const taskString = incompleteTaskCount === 1 ? 'task' : 'tasks'
     listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
 }
-
 
 function renderLists() {
     lists.forEach(list => {
@@ -144,4 +138,6 @@ function clearElement(element) {
     }
 }
 
-render()
+render() //
+
+//Alan
